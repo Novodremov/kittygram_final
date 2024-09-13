@@ -2,6 +2,7 @@
 import os
 from pathlib import Path
 
+from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -10,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEFAULT_DB_PORT = 5432
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'default-secret-key')
+SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 SERVER_IP = os.getenv('SERVER_IP')
 SERVER_DOMAIN = os.getenv('SERVER_DOMAIN')
 
@@ -62,7 +63,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'kittygram_backend.wsgi.application'
 
 
-DATABASES = {
+POSTGRES_DATABASE = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('POSTGRES_DB', 'django'),
@@ -72,7 +73,13 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', DEFAULT_DB_PORT)
     }
 }
-
+SQLITE_DATABASE = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+DATABASES = SQLITE_DATABASE if bool(os.getenv('SQLITE_BASE_CHOICE')) else POSTGRES_DATABASE
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

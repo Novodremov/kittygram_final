@@ -13,8 +13,8 @@ services:
     image: nvdrmv/kittygram_backend
     env_file: .env
     volumes:
-      - static:/backend_static/
-      - media:/media/
+      - static:/backend_static
+      - media:/media
     depends_on:
       - db
   frontend:
@@ -22,7 +22,7 @@ services:
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
-      - static:/frontend_static/
+      - static:/frontend_static
   gateway:
     image: nvdrmv/kittygram_gateway
     env_file: .env
@@ -31,3 +31,6 @@ services:
     volumes:
       - static:/static
       - media:/media
+    depends_on:
+      - backend
+      - frontend
