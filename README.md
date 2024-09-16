@@ -1,4 +1,4 @@
-![Workflow Status](https://github.com/novodremov/kittygram_final/actions/workflows/main.yml/badge.svg)
+![Workflow Status](https://github.com/Novodremov/kittygram_final/actions/workflows/main.yml/badge.svg)
 
 # **Kittygram**
 Сервис для публикации фотографий котиков. Указывается имя, год рождения, цвет котика, также дополнительно можно публиковать его достижения. Можно просматривать записи чужих котиков.
