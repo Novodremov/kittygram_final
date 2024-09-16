@@ -1,4 +1,4 @@
-![Workflow Status](https://github.com/nvdrmv/kittygram_final/actions/workflows/main.yml/badge.svg)
+![Workflow Status](https://github.com/novodremov/kittygram_final/actions/workflows/main.yml/badge.svg)
 
 # **Kittygram**
 Сервис для публикации фотографий котиков. Указывается имя, год рождения, цвет котика, также дополнительно можно публиковать его достижения. Можно просматривать записи чужих котиков.
@@ -47,6 +47,25 @@ SQLITE_BASE_CHOICE=False
 ```
 
 Workflow находится в папке .github/workflows/
+
+
+**Локальное разворачивание проекта с помощью Docker Compose:**
+
+* Создание файла .env в папке kittygram по примеру выше
+
+* Загрузка образов с Docker hub: *sudo docker compose -f docker-compose.production.yml pull*
+
+* Сборка и запуск контейнеров: *sudo docker compose -f docker-compose.production.yml up -d*
+
+* Применение миграций: *sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate*
+
+* Создание суперюзера: *sudo docker compose -f docker-compose.production.yml exec backend python manage.py createsuperuser*
+
+* Сбор файлов статики: *sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic*
+
+* Копирование файлов статики в /backend_static/static/ backend-контейнера: *sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/*
+
+* Проект доступен по адресу 127.0.0.1:8000
 
 
 ## Авторы:
